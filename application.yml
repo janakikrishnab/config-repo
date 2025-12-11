@@ -1,2 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
 
-message: Hello Savitri, Config Server is working!
+        - id: booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/booking/**
+          filters:
+            - StripPrefix=1
+
+        - id: flight-service
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/flight/**
+          filters:
+            - StripPrefix=1
